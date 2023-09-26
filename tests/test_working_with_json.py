@@ -1,7 +1,7 @@
 import pytest
 from src.utils.working_with_json import load_json, select_executed_operation, sort_descending
 
-PATH = '../src/data/operations.json'
+PATH = './src/data/operations.json'
 
 
 @pytest.fixture
