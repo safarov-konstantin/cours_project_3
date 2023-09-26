@@ -15,15 +15,20 @@ def get_date_representation(str_data):
 def get_bankcard_num_representation(bankcard):
     """
     Создает представление банковского номера карты в формате "XXXX XX** **** XXXX"
-    :param bankcard_num: номер карты в формате "Maestro 1596837868705199"
+    :param bankcard: номер карты в формате "Maestro 1596837868705199"
     :return: строку банковского номера карты в формате "XXXX XX** **** XXXX"
     """
     if bankcard is None:
         return ''
 
-    bankcard_lst = bankcard.split(' ')
-    bankcard_payment_system = bankcard_lst[0]
-    bankcard_num = bankcard_lst[1]
+    # используем расширенную распоковку, так гарантированно
+    # номер попадет в bankcard_num а платежная система может
+    # состояеть из нескольких слов
+    *bankcard_payment_system, bankcard_num = bankcard.split(' ')
+
+    # соедияем спопощью join, т.к. наименование платежной си-мы может
+    # состоять из нескольких слов
+    bankcard_payment_system = ' '.join(bankcard_payment_system)
 
     representation = f'{bankcard_payment_system} {bankcard_num[:4]} {bankcard_num[4:6]}** **** {bankcard_num[-4:]}'
 

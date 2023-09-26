@@ -10,7 +10,7 @@ def load_json(path: str):
     :return: дессериализованную струкутуру
     """
     with open(path, encoding='utf8') as file:
-        return loads(file.read())
+        return [operation for operation in loads(file.read()) if operation != {}]
 
 
 def select_executed_operation(operations):
